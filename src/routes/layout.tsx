@@ -1,5 +1,6 @@
 import {component$, createContextId, Slot, useContextProvider, useStore} from "@builder.io/qwik";
 import Modal from "~/components/modal";
+import {strictEqual} from "node:assert";
 
 export const MyContext  = createContextId('qwik-affirmations');
 
@@ -15,9 +16,11 @@ export default component$(() => {
       <>
         {state.openModal && <Modal />}
         <header>
-          icon
+          <i onClick$={() => {
+            state.openModal = !state.openModal
+          }} class="fa-solid fa-plus cursor-pointer"></i>
         </header>
-        <main class="flex-1 flex flex-col max-w-[1200px] mx-auto w-full">
+        <main class="flex-1 flex flex-col max-w-[1200px] mx-auto w-full relative">
           <Slot />
         </main>
         <footer>
